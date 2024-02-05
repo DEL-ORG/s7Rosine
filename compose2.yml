@@ -1,5 +1,5 @@
 giing to make more commits
-version: '3'
+version: '3.3'
 
 services:
   nginx1:
@@ -26,3 +26,14 @@ services:
     image: nginx:latest
     ports:
       - "8085:80"
+   apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-app
+spec:
+  containers:
+    - name: web
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+   
