@@ -1,1 +1,28 @@
 giing to make more commits
+version: '3'
+
+services:
+  nginx1:
+    image: nginx:latest
+    ports:
+      - "8081:80"
+
+  nginx2:
+    image: nginx:latest
+    ports:
+      - "8082:80"
+
+  nginx3:
+    image: nginx:latest
+    ports:
+      - "8083:80"
+
+  nginx4:
+    image: nginx:latest
+    ports:
+      - "8084:80"
+
+  nginx5:
+    image: nginx:latest
+    ports:
+      - "8085:80"
