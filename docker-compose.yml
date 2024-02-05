@@ -6,8 +6,7 @@ services:
     image: nginx:latest
     ports:
       - "80:80"
-  backend:
-    image: node:latest
+  
     ports:
       - "3000:3000"
     volumes:
