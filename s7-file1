@@ -1,1 +1,16 @@
 Welcome to s7
+version: '3'
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+  backend:
+    image: node:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    environment:
+      NODE_ENV: production
