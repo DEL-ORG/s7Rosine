@@ -1,0 +1,76 @@
+[A[A[B[C[C[C[C[C[3~[C[C[C[C[C[C[C[C[C[C[C[C[C
+version: "3.3"
+
+services:
+  auth:
+    container_name: weatherapp-auth
+    image: devopseasylearning/tarzan-auth:v0.0.1
+    ports:
+      - 8080
+    environment:
+      DB_HOST: db
+      DB_PASSWORD: my-secret-pw
+    depends_on:  
+      - weather  
+    networks: 
+      - weathernet  
+
+  ui:
+    container_name: weatherapp-ui
+    image: devopseasylearning/tarzan-ui:v0.0.1
+    ports: 
+      - "3000:3000"
+    environment:
+      - AUTH_HOST=auth
+      - WEATHER_HOST=weather
+      - AUTH_PORT=8080 
+      - WEATHER_PORT=5000
+      - REDIS_USER=redis 
+      - REDIS_PASSWORD=redis
+    depends_on:   
+      - auth
+    networks:
+      - weathernet  
+      AUTH_HOST: auth
+      AUTH_PORT: 8080
+
+  weather: 
+    container_name: weatherapp-weather  
+    image: devopseasylearning/tarzan-weather:v0.0.1
+    ports:
+      - "5000"
+    environment:
+      - APIKEY=ecbc396f46mshb65cbb1f82cf334p1fcc87jsna5e962a3c542
+    depends_on:
+      - db
+      - redis
+    networks:
+      - weathernet
+
+  db:
+    container_name: weatherapp-db
+    image: devopseasylearning/tarzan-db:v0.0.1
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - weathernet
+
+  redis:
+    container_name: weatherapp-redis
+    image: redis
+    networks:
+      - weathernet
+    environment:
+      REDIS_USER: redis
+      REDIS_PASSWORD: redis
+    volumes:
+      - redis-data:/data
+
+networks:
+  weathernet:
+    driver: bridge
+
+volumes:
+  db-data:
