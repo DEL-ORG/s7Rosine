@@ -1,17 +1,29 @@
+# Use the official Apache HTTP Server image as the base image
 FROM httpd
 
 # Create a volume for data persistence
 VOLUME /saves
 
+# Set the working directory inside the container
 WORKDIR /usr/local/apache2/htdocs/
 
+# Install wget and unzip utilities
+RUN apt-get update && apt-get install -y wget unzip
+
+# Remove all existing files in the working directory
 RUN rm -rf *
 
-# Copy content into the container
+# Download and unzip the project files
+RUN wget -O halloween.zip "https://linuxdevopscourse.s3.amazonaws.com/halloween.zip" \
+    && unzip halloween.zip \
+    && rm halloween.zip
+
+# Copy any additional content into the container
 COPY . /usr/local/apache2/htdocs/
 
 # Expose port 80 for web access
 EXPOSE 80
+
 
 
 
