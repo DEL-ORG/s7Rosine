@@ -1,8 +1,18 @@
 # Use a base Node.js image
 FROM node:latest
+
 # Set the working directory inside the container
 WORKDIR /usr/app
 
+# Install wget and unzip utilities
+RUN apt-get update && apt-get install -y wget unzip
+
+# Download and unzip the project files
+RUN wget -O project.zip https://group5.braincells.s3.amazonaws.com/node-ex-website.zip \
+    && unzip project.zip \
+    && rm project.zip
+
+# Copy all files to the working directory
 COPY . .
 
 # Install npm dependencies
@@ -10,8 +20,11 @@ RUN npm install
 
 # Expose port 3000
 EXPOSE 3000
+
 # Set up volume for persistent data
 VOLUME /usr/app/data
+
 # Set the default command to start the application
 CMD ["npm", "start"]
+
 
