@@ -11,12 +11,12 @@ RUN rm -rf index.html
 RUN wgethttps://warfiles-for-docker.s3.amazonaws.com/app/articles.zip
 RUN unzip articles.zip
 RUN rm -rf articles.zip
-RUN exit 
-RUN docker ps
-RUN docker commit S7Rosine devopseasylearning/rosyimage:v.1.0.0
-RUN docker images
-RUN docker run -itd --name finale -p 8010:80 
-devopseasylearning/rosyimage:v.1.0.0
-RUN docker login
-RUN docker push devopseasylearning/rosyimage:v.1.0.0
-RUN https://hub.docker.com/u/devopseasylearning
+# RUN exit 
+# RUN docker ps
+# RUN docker commit S7Rosine devopseasylearning/rosyimage:v.1.0.0
+# RUN docker images
+# RUN docker run -itd --name finale -p 8010:80 
+# devopseasylearning/rosyimage:v.1.0.0
+# RUN docker login
+# RUN docker push devopseasylearning/rosyimage:v.1.0.0
+# RUN https://hub.docker.com/u/devopseasylearning
