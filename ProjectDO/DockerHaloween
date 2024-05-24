@@ -1,5 +1,5 @@
 # Use the official Apache HTTP Server image as the base image
-FROM httpd
+FROM httpd:latest
 
 # Create a volume for data persistence
 VOLUME /saves
@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y wget unzip
 RUN rm -rf *
 
 # Download and unzip the project files
-RUN wget -O halloween.zip "https://linuxdevopscourse.s3.amazonaws.com/halloween.zip" \
+RUN wget "https://linuxdevopscourse.s3.amazonaws.com/halloween.zip" \
     && unzip halloween.zip \
     && rm halloween.zip
 
